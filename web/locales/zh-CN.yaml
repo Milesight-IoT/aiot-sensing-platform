@@ -1,0 +1,297 @@
+Devices become inactive: 设备不活跃
+GPS: GPS
+Low battery: 低电量
+Once data received: 一旦收到数据
+Send to recipients: 发送给接收方
+Show on widget: 展示在仪表盘组件上
+alarmIn: Alarm In
+Once result recognized: 一旦识别到结果
+auth:
+  atLeast: 密码要求：
+  changePwd: 修改密码
+  confirmNewPwd: 确认新密码
+  curPwd: 当前密码
+  incorrectPwd: 密码错误！
+  invalidPwd: 密码不符合要求！
+  login: 登陆
+  newPwd: 新密码
+  pwdDisMatch: 新密码不匹配！
+  pwdLimit1: 至少8个字符
+  pwdLimit2: 至少2种字符：数字、英文字母和英文符号
+battery: Battery
+buttons:
+  add: 添加
+  cancel: 取消
+  clear: 清除
+  close: 关闭
+  confirm: 确认
+  delete: 删除
+  discard: 放弃
+  download: 下载
+  exitfullscreen: 退出全屏
+  fullscreen: 全屏
+  hscloseAllTabs: closeAllTabs
+  hscloseCurrentTab: closeCurrentTab
+  hscloseLeftTabs: closeLeftTabs
+  hscloseOtherTabs: closeOtherTabs
+  hscloseRightTabs: closeRightTabs
+  hscontentExitFullScreen: 内容区退出全屏
+  hscontentFullScreen: 内容区全屏
+  hsreload: 刷新
+  hswholeExitFullScreen: 退出全屏
+  hswholeFullScreen: 全屏
+  login: 登陆
+  loginOut: 登出
+  'no': 否
+  ok: 确认
+  reload: 重载
+  save: 保存
+  search: 搜索
+  security: 安全
+  'yes': 是
+common:
+  coordinate: 坐标
+  createdTime: 创建时间
+  detail: 详情
+  details: 详情
+  fileName: 文件名
+  key: 键名
+  name: 名称
+  noImg: 无图片
+  errorImg: 图片错误
+  password: 密码
+  requireFailed: 必填项！
+  requiredField: 必填项！
+  requiredFiled: 必填项！
+  status: 状态
+  timeRange: 时间范围
+  type: 类型
+  typeOfSearch: 搜索
+  updatedTime: 更新时间
+  username: 用户名
+  value: 值
+  version: 版本
+dashboard:
+  addNewDashboard: 添加新仪表盘
+  alarmTable: 报警表
+  alarmTableDescription: 实时可视化报警。
+  details: 仪表盘详情
+  delTips: 请注意，确认后将无法恢复仪表盘和所有相关数据。
+  devicesStatus: 设备状态
+  devicesStatusDescription: 展示所有设备的状态。
+  exist: 仪表盘已存在！
+  imageSensingChannel: 图片感知通道
+  makeDashboardPublic: 公开仪表盘
+  multiDelTips: 请注意，确认后将无法恢复所有选中的仪表盘和所有相关数据。
+  pleaseEnterDashboardName: 请输入仪表盘名称
+  pleaseEnterImageSenseChannel: 请选择感知对象的1个图片通道
+  public: 公开
+  publicLink: 公开链接
+  selectOneTips: '%s个仪表盘已选择'
+  selectTips: '%s个仪表盘已选择'
+  selectWidgets: 选择组件
+  snapshotPreview: 快照预览
+  snapshotPreviewDescription: 实时更新一个感知对象的图片通道快照。
+  source: 来源
+  sureDel: 确认要删除仪表盘'%s'？
+  sureDelOne:  确认要删除%s个仪表盘？
+  sureDels: 确认要删除%s个仪表盘？
+  widgetSnapshotPreview: 组件：快照预览
+device:
+  addNewDevice: 添加新设备
+  addRoi: 新增ROI
+  attrExist: 属性已存在！
+  attrRecogniz: 待识别属性
+  channelName: 通道名称
+  clearObjectBeforeDelRoi: 请先清除与该对象的关联再删除
+  delItemsFailed: 因于感知对象有关联，删除以下设备失败。
+  delRoiTips: 请注意，确认后将无法恢复ROI和所有相关数据
+  deleteSelTips: '%s台设备已选择'
+  deleteSensingTips: 请清除关联，然后删除该设备。
+  deleteTips: 请注意，确认后将无法恢复设备和所有相关数据。
+  deletesSelTips: '%s台设备已选择'
+  details: 设备详情
+  existDevice: 设备已存在！
+  existRoi: ROI已存在！
+  fullImg: 全图
+  imgChannel: 图片通道
+  imgRegAbility: 图片识别能力
+  invalidSN: 请输入一个正确的SN！
+  jumpToObj: 跳转至对象
+  lastUpdateTime: 最后更新时间
+  latestTelemetry: 最新遥测数据
+  license: License Plate
+  list: 设备列表
+  model: 设备型号
+  plateColor: Plate Color
+  plateType: Plate Type
+  pleaseDrawRoi: 请先绘制一个区域！
+  pleaseEnterAttrs: 请添加少于5个待识别属性
+  pleaseEnterChannelName: 请输入ROI的通道名称
+  pleaseEnterDeviceName: 请输入设备名称
+  pleaseEnterReplaceSN: 请输入替换设备的SN，并确保是相同型号。
+  pleaseEnterSN: 请输入设备SN
+  pleaseSelectModel: 请选择设备型号
+  replace: 替换该设备
+  setImgRoi: 设置小于5个ROI来识别属性。
+  setNewRoi: 配置新ROI
+  setRoi: 配置新ROI
+  sn: 设备SN
+  sureDelDevice: 确认要删除%s台设备？
+  sureDelDevices: 确认要删除%s台设备？
+  sureDelDevicesTips: 请注意，确认后所有选中的设备将被删除，并无法恢复所有相关数据。
+  sureDelRoi: 确认要删除ROI'%s'？
+  sureDelRoiWithObject: ROI'%s'与感知对象'%s1'已关联！
+  sureDelete: 确认要删除设备%s？
+  sureDeleteSensing: 设备%s与感知对象%s1已关联！
+  sureReplace: 确认要替换该设备？
+  vehicleType: Vehicle Type
+error:
+  netError: 网络错误！
+forgetPwd: 忘记密码
+image: 图片
+menus:
+  dashboard: 仪表盘
+  dashboards: 仪表盘
+  devices: 设备
+  hshome: 首页
+  login: 登陆
+  objects: 感知对象
+  otaUpdates: OTA 升级
+  recipients: 接收方
+  rules: 规则
+  systemSettings: 系统设置
+noMatchData: 无匹配数据
+object:
+  addNewObject: 添加新感知对象
+  artificialRecognize: 人工识别
+  dataSel: '%s条数据已选择'
+  datasSel: '%s条数据已选择'
+  deleteSelTips: 确认要删除感知对象'%s'？
+  deleteTips: 请注意，确认后将无法恢复感知对象和所有相关数据。
+  deletesSelTips: '%s个感知对象已选择'
+  details: 感知对象详情
+  existSensingObject: 感知对象已存在！
+  imgPreview: 图片预览
+  list: 感知对象列表
+  noAssociatChannel: 无关联通道
+  oneSelObject: '%s个感知对象已选择'
+  pleaseEnterObjectName: 请输入感知对象名称
+  pleaseSelectChannels: 请从设备中关联少于9个感知通道
+  sensingChannel: 感知通道
+  sensingChannels: 感知通道
+  sensingData: 感知数据
+  sureDelete: 确认要删除感知对象'%s'？
+  sureDeleteObject: 确认要删除%s个感知对象？
+  sureDeleteObjects: 确认要删除%s个感知对象？
+  sureDeletesTips: 请注意，确认后将无法恢复所有选中的感知对象和所有相关数据。
+ota:
+  addPackage: 添加新包
+  checkSum: 校验和
+  click2Upload: 点击上传
+  configFile: 配置文件
+  deleteSelTips: '%s个包已选择'
+  deletesSelTips: '%s个包已选择'
+  distribute2all: 部署到该型号所有设备
+  distributeAll: 部署所有设备
+  dropFile: 拖拽文件至此或
+  errorFileTips: 请上传正确的包文件！
+  firmware: 固件
+  packageExist: 包已存在！
+  packageRepos: 包仓库
+  pkgExist: 包已存在！
+  pleaseEnterVersion: 请输入版本
+  pleaseSelectConfig: 请选择一个配置文件来升级
+  pleaseSelectModel: 请选择匹配的型号
+  pleaseSelectOta: 请选择一个固件来升级
+  pleaseUploadPkg: 请先上传包文件！
+  sizeLimit: 包大小＞200MB！
+  sureDelete: 确认要删除包‘%s’？
+  sureDeleteOta: 确认要删除%s个包？
+  sureDeleteOtas: 确认要删除%s个包？
+  sureDeleteTips: 请注意，确认后该包将被删除。
+  sureDeletesTips: 请注意，确认后所有选中的包将被删除。
+  update: OTA升级
+  fileNameLimit: 仅支持英文名文件！
+recip:
+  addNewRecipient: 添加新接收方
+  delItemsFailed: 因于规则有关联，删除以下接收方失败。
+  delRecipientTips: 请注意，确认后所有选中的接收方将被删除，并无法恢复所有相关数据。
+  deleteSensingTips: 请清除关联，然后删除该接收方。
+  deleteTips: 请注意，确认后将无法恢复接收方和所有相关数据
+  details: 接收方详情
+  host: 主机
+  httpPost: HTTP Post
+  jumpToRule: 跳转至规则
+  list: 接收方列表
+  mqtt: MQTT
+  nameExist: 接收方已存在！
+  pleaseClearRule: 请清除关联，然后删除该接收方。
+  pleaseEnterHost: 请输入主机端口号（1~65535）
+  pleaseEnterName: 请输入接收方名称
+  pleaseEnterTopic: 请输入MQTT主题
+  port: 端口号
+  selectOneTips: '%s个接收方已选择'
+  selectTips: '%s个接收方已选择'
+  sureDelOne: 确认要删除%s个接收方？
+  sureDelete: 确认要删除接收方'%s'？
+  sureDeleteSensing: 接收方%s与规则%s1已关联！
+  sureDels: 确认要删除%s个接收方？
+  topic: 主题
+  transProtocol: 传输协议
+  url: URL
+rememberMe: 记住密码
+rules:
+  action: 动作
+  actions: 动作
+  addNewRule: 添加新规则
+  anyChannels: 任何感知通道
+  anyDevices: 请选择源设备
+  delTips: 请注意，确认后将无法恢复规则和所有相关数据。
+  details: 规则详情
+  deviceInactive: 设备不活跃
+  existRule: 规则已存在！
+  list: 规则列表
+  lowBattery: 低电量
+  multiDelTips: 请注意，确认后将无法恢复所有选中的规则和所有相关数据。
+  onceReceive: 一旦收到数据
+  pleaseEnterRuleName: 请输入规则名称
+  pleaseSelChannels: 请选择源感知对象
+  pleaseSelAction: 请选择动作
+  pleaseSelRecipients: 请选择少于5个接收方
+  selectOneTips: '%s个规则已选择'
+  selectTips: '%s个规则已选择'
+  send2Recipients: 发送给接收方
+  showOnWidget: 展示在仪表盘组件上
+  srcDevice: 源设备
+  srcSensingChannels: 源感知通道
+  srcSensingObjects: 源感知对象
+  sureDel: 确认要删除规则‘%s’？
+  sureDelOne: 确认要删除%s个规则？
+  sureDels: 确认要删除%s个规则？
+  threshold: 阈值（%）
+  trigger: 触发器
+  onceResultRecognized: 一旦识别到结果
+  roiChannels: 图片通道
+  pleaseSelectChannels: 请选择设备的ROI通道。
+sensingPlatform: AIoT Sensing Platform
+status:
+  active: 活跃
+  destributing: 分发中
+  hsLoad: 加载中
+  inactive: 不活跃
+  load: 加载中...
+  loginFailed: 用户或密码错误！
+  success: 成功！
+widget:
+  activeDevices: 活跃设备
+  alarmTable: '组件: 告警列表'
+  deleteTips: 确认后将无法恢复该组件和所有相关数据。
+  deviceStatus: '组件: 设备状态'
+  inactiveDevices: 不活跃设备
+  snapshotPreview: '组件: 快照预览'
+  statusType: 状态类型
+  sureDelete: 确认要删除该组件？
+  totalDevices: 所有设备
+ruleTips:
+  validRange: '有效值'

@@ -1,0 +1,179 @@
+// 登录页面背景
+.login-background {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    background: url('../assets/login/bg.png') center no-repeat;
+
+    .login-main {
+        width: 100%;
+        height: 43%;
+        min-height: 400px;
+        position: relative;
+        background: url('../assets/login/left.png') no-repeat left, url('../assets/login/right.png') no-repeat right,
+            linear-gradient(90deg, #164079, #022554), linear-gradient(#fff, #fff);
+
+        .login-content {
+            width: 320px;
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            margin-left: -160px;
+            z-index: 2;
+
+            .el-form-item {
+                margin-bottom: 28px;
+                width: 100%;
+            }
+
+            .remember,
+            .button {
+                display: flex;
+                justify-content: space-between;
+                color: #fff;
+                align-items: center;
+                width: 100%;
+            }
+
+            .el-checkbox,
+            .el-button {
+                color: white;
+
+                .el-checkbox__label {
+                    color: white;
+                }
+            }
+
+            .login-btn {
+                width: 100%;
+                background-color: #007ed1;
+                margin: 20px 0;
+            }
+
+            .login-btn:hover {
+                background-color: #3d93eb;
+            }
+        }
+
+        .device-type {
+            color: white;
+            margin-top: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .device-type:before,
+        .device-type::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 30px;
+            background: linear-gradient(90deg, #ffffff 0%, #2a73ca 100%);
+            position: absolute;
+            right: -35px;
+            top: 50%;
+        }
+
+        .device-type::before {
+            left: -35px;
+            background: linear-gradient(90deg, #2a73ca 0%, #ffffff 100%);
+        }
+    }
+
+    .login-main:after {
+        content: '';
+        width: 100%;
+        height: 108%;
+        position: absolute;
+        top: -4%;
+        opacity: 0.9;
+        z-index: -1;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-blend-mode: soft-light;
+        background: #bac1cc;
+    }
+
+    .icon-logo {
+        color: white;
+        font-size: 4rem;
+    }
+
+    .activate-box {
+        .el-input {
+            width: 240px;
+            margin-right: 14px;
+            vertical-align: middle;
+        }
+
+        .isReset input[readonly] {
+            background-color: #dbdbdb;
+            border: solid 1px #b7b7b7;
+        }
+
+        .resetInput .el-input.is-disabled .el-input__inner {
+            color: #606266;
+            background-color: #dbdbdb !important;
+        }
+
+        .sq-tips {
+            margin-bottom: 15px;
+        }
+
+        .txt-put {
+            width: calc(100% - 55px);
+        }
+    }
+
+    .errorTips {
+        text-align: left;
+        display: block;
+        margin-bottom: 15px;
+        font-size: 12px;
+        // background: #ffe6e5 url(/image/error.png) left center no-repeat;
+        border: solid 1px #ff0000;
+        display: block;
+        // visibility: hidden;
+        line-height: 30px;
+        padding-left: 20px;
+        width: 91%;
+        word-break: keep-all;
+    }
+
+    .icon-pop-ups-warning::before {
+        color: red;
+        margin-left: -10px;
+        margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .login-container {
+        /* grid-gap: 9rem; */
+    }
+
+    .login-content {
+        width: 290px;
+    }
+
+    .avatar {
+        width: 280px;
+        height: 80px;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .login-container {
+        /* grid-template-columns: 1fr; */
+    }
+
+    .login-box {
+        justify-content: center;
+    }
+}

@@ -1,0 +1,66 @@
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-plus.scss';
+@import './sidebar.scss';
+@import './dark.scss';
+@import './size.scss';
+
+/* 自定义全局 CssVar */
+:root {
+    --pure-transition-duration: 0.016s;
+}
+
+/* 灰色模式 */
+.html-grey {
+    filter: grayscale(100%);
+}
+
+/* 色弱模式 */
+.html-weakness {
+    filter: invert(80%);
+}
+
+.boder-shadow {
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.16);
+}
+
+.cropper-container ._rawValue {
+    position: relative;
+    background: black;
+    overflow: hidden;
+}
+
+.cropper-view-box {
+    border: 1px solid blue;
+    outline-color: blue !important;
+}
+
+.cropper-crop-box {
+    .cropper-point,
+    .cropper-dashed {
+        display: none;
+    }
+}
+
+.roi-text {
+    position: absolute;
+    color: blue;
+}
+
+.color-error {
+    color: #f10000;
+}
+
+.text-waring {
+    color: #ff8000;
+}
+
+.text-success {
+    color: #5ab92b;
+}
+
+.bg-dark {
+    background: $menuBg;
+    color: white;
+}

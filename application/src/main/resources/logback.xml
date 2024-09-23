@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright © 2016-2023 The Thingsboard Authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+<!DOCTYPE configuration>
+<configuration scan="true" scanPeriod="10 seconds">
+    <!--输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 指定日志文件的存储地址，使用绝对路径 -->
+    <property name="LOG_HOME" value="home/logs/thingsboard"/>
+    <!-- 按照每天生成日志文件 -->
+    <appender name="fileLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件输出的文件名 -->
+            <fileNamePattern>${LOG_HOME}/thingsboard.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    单独的异常日志    -->
+    <appender name="fileErrorLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/thingsboard.%d{yyyy-MM-dd}_error.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <logger name="org.thingsboard.server" level="INFO"/>
+    <logger name="org.apache.kafka.common.utils.AppInfoParser" level="WARN"/>
+    <logger name="org.apache.kafka.clients" level="WARN"/>
+    <!-- To enable the logging of scanned rule engine components-->
+    <!--    <logger name="org.thingsboard.server.service.component.AnnotationComponentDiscoveryService" level="DEBUG" />-->
+    <!-- Other useful logs -->
+    <!--    <logger name="org.springframework.jdbc.core" level="TRACE" />-->
+    <!--    <logger name="org.hibernate.SQL" level="DEBUG" />-->
+    <!--    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />-->
+
+    <logger name="org.thingsboard.server.dao.sql.TbSqlBlockingQueue" level="WARN"/>
+    <!--    <logger name="org.thingsboard.server.service.transport" level="TRACE" />-->
+    <!--    <logger name="org.thingsboard.server.queue.memory.InMemoryStorage" level="DEBUG" />-->
+    <!--    <logger name="org.thingsboard.server.service.ttl.AbstractCleanUpService" level="DEBUG" />-->
+
+    <!--    <logger name="org.thingsboard.server.service.subscription" level="TRACE"/>-->
+    <!--    <logger name="org.thingsboard.server.service.telemetry" level="TRACE"/>-->
+    <!--    <logger name="org.eclipse.californium.scandium.DTLSConnector" level="TRACE" />-->
+    <!--    <logger name="org.eclipse.californium.scandium.dtls.Handshaker" level="DEBUG" />-->
+
+    <!-- Top Rule Nodes by max execution time -->
+    <!--    <logger name="org.thingsboard.server.service.queue.TbMsgPackProcessingContext" level="DEBUG" /> -->
+
+    <!-- MQTT transport debug -->
+    <!--    <logger name="org.thingsboard.server.transport.mqtt.MqttTransportHandler" level="DEBUG" /> -->
+
+    <logger name="com.microsoft.azure.servicebus.primitives.CoreMessageReceiver" level="OFF"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="fileLogAppender"/>
+        <appender-ref ref="fileErrorLogAppender"/>
+    </root>
+</configuration>

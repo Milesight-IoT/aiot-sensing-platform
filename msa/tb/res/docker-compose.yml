@@ -1,0 +1,16 @@
+version: '3.0'
+services:
+  mysp:
+    restart: always
+    image: "msaiotsensingplatform:demo"
+    ports:
+      - "5220:9090"
+      - "1883:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      # queue-mode
+      TB_QUEUE_TYPE: in-memory
+    volumes:
+      - /var/mysp-data:/data
+      - /var/mysp-logs:/var/log/msaiotsensingplatform

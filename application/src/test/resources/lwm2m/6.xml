@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright © 2016-2023 The Thingsboard Authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M.xsd">
+  <Object ObjectType="MODefinition">
+		<Name>Location</Name>
+		<Description1><![CDATA[This LwM2M Object provides a range of location telemetry related information which can be queried by the LwM2M Server.]]></Description1>
+		<ObjectID>6</ObjectID>
+		<ObjectURN>urn:oma:lwm2m:oma:6</ObjectURN>
+	  	<LWM2MVersion>1.0</LWM2MVersion>
+	  	<ObjectVersion>1.0</ObjectVersion>
+		<MultipleInstances>Single</MultipleInstances>
+		<Mandatory>Optional</Mandatory>
+		<Resources>
+			<Item ID="0">
+				<Name>Latitude</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Mandatory</Mandatory>
+				<Type>Float</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units>lat</Units>
+				<Description><![CDATA[The decimal notation of latitude, e.g. -43.5723 [World Geodetic System 1984].]]></Description>
+			</Item>
+			<Item ID="1">
+				<Name>Longitude</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Mandatory</Mandatory>
+				<Type>Float</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units>lon</Units>
+				<Description><![CDATA[The decimal notation of longitude, e.g. 153.21760 [World Geodetic System 1984].]]></Description>
+			</Item>
+			<Item ID="2">
+				<Name>Altitude</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Optional</Mandatory>
+				<Type>Float</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units>m</Units>
+				<Description><![CDATA[The decimal notation of altitude in meters above sea level.]]></Description>
+			</Item>
+			<Item ID="3">
+				<Name>Radius</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Optional</Mandatory>
+				<Type>Float</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units>m</Units>
+				<Description><![CDATA[The value in this resource indicates the radius of a circular area in meters. The circular area is used to describe uncertainty about a point for coordinates in a two-dimensional coordinate reference systems (CRS). The center point of a circular area is specified by using the Latitude and the Longitude Resources.]]></Description>
+			</Item>
+			<Item ID="4">
+				<Name>Velocity</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Optional</Mandatory>
+				<Type>Opaque</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units></Units>
+				<Description><![CDATA[The velocity of the LwM2M Client, as defined in [3GPP-TS_23.032].]]></Description>
+			</Item>
+			<Item ID="5">
+				<Name>Timestamp</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Mandatory</Mandatory>
+				<Type>Time</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units></Units>
+				<Description><![CDATA[The timestamp of when the location measurement was performed.]]></Description>
+			</Item>
+			<Item ID="6"><Name>Speed</Name>
+				<Operations>R</Operations>
+				<MultipleInstances>Single</MultipleInstances>
+				<Mandatory>Optional</Mandatory>
+				<Type>Float</Type>
+				<RangeEnumeration></RangeEnumeration>
+				<Units>m/s</Units>
+				<Description><![CDATA[Speed is the time rate of change in position of a LwM2M Client without regard for direction: the scalar component of velocity.]]></Description>
+			</Item></Resources>
+		<Description2></Description2>
+	</Object>
+</LWM2M>

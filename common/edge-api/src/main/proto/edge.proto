@@ -1,0 +1,573 @@
+/**
+ * Copyright © 2016-2023 The Thingsboard Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+option java_package = "org.thingsboard.server.gen.edge.v1";
+option java_multiple_files = true;
+option java_outer_classname = "EdgeProtos";
+
+import "queue.proto";
+
+package edge;
+
+// Interface exported by the ThingsBoard Edge Transport.
+service EdgeRpcService {
+
+  rpc handleMsgs(stream RequestMsg) returns (stream ResponseMsg) {}
+
+}
+
+enum EdgeVersion {
+  V_3_3_0 = 0;
+  V_3_3_3 = 1;
+  V_3_4_0 = 2;
+}
+
+/**
+ * Data Structures;
+ */
+message RequestMsg {
+  RequestMsgType msgType = 1;
+  ConnectRequestMsg connectRequestMsg = 2;
+  UplinkMsg uplinkMsg = 3;
+  DownlinkResponseMsg downlinkResponseMsg = 4;
+  SyncRequestMsg syncRequestMsg = 5;
+}
+
+message ResponseMsg {
+  ConnectResponseMsg connectResponseMsg = 1;
+  UplinkResponseMsg uplinkResponseMsg = 2;
+  DownlinkMsg downlinkMsg = 3;
+  EdgeUpdateMsg edgeUpdateMsg = 4;
+}
+
+enum RequestMsgType {
+  CONNECT_RPC_MESSAGE = 0;
+  UPLINK_RPC_MESSAGE = 1;
+  SYNC_REQUEST_RPC_MESSAGE = 2;
+}
+
+message EdgeUpdateMsg {
+  EdgeConfiguration configuration = 1;
+}
+
+message ConnectRequestMsg {
+  string edgeRoutingKey = 1;
+  string edgeSecret = 2;
+  EdgeVersion edgeVersion = 3;
+  optional int32 maxInboundMessageSize = 4;
+}
+
+enum ConnectResponseCode {
+  ACCEPTED = 0;
+  BAD_CREDENTIALS = 1;
+  SERVER_UNAVAILABLE = 2;
+}
+
+message ConnectResponseMsg {
+  ConnectResponseCode responseCode = 1;
+  string errorMsg = 2;
+  EdgeConfiguration configuration = 3;
+  optional int32 maxInboundMessageSize = 4;
+}
+
+message SyncRequestMsg {
+  bool syncRequired = 1;
+  optional bool fullSync = 2;
+}
+
+message SyncCompletedMsg {
+}
+
+message EdgeConfiguration {
+  int64 edgeIdMSB = 1;
+  int64 edgeIdLSB = 2;
+  int64 tenantIdMSB = 3;
+  int64 tenantIdLSB = 4;
+  int64 customerIdMSB = 5;
+  int64 customerIdLSB = 6;
+  string name = 7;
+  string type = 8;
+  string routingKey = 9;
+  string secret = 10;
+  string additionalInfo = 11;
+  string cloudType = 12;
+}
+
+enum UpdateMsgType {
+  ENTITY_CREATED_RPC_MESSAGE = 0;
+  ENTITY_UPDATED_RPC_MESSAGE = 1;
+  ENTITY_DELETED_RPC_MESSAGE = 2;
+  ALARM_ACK_RPC_MESSAGE = 3;
+  ALARM_CLEAR_RPC_MESSAGE = 4;
+  ENTITY_MERGE_RPC_MESSAGE = 5; // deprecated
+}
+
+message EntityDataProto {
+  int64 entityIdMSB = 1;
+  int64 entityIdLSB = 2;
+  string entityType = 3;
+  transport.PostTelemetryMsg postTelemetryMsg = 4;
+  transport.PostAttributeMsg postAttributesMsg = 5;
+  transport.PostAttributeMsg attributesUpdatedMsg = 6;
+  string postAttributeScope = 7;
+  AttributeDeleteMsg attributeDeleteMsg = 8;
+}
+
+message AttributeDeleteMsg {
+  string scope = 1;
+  repeated string attributeNames = 2;
+}
+
+message RuleChainUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  string name = 4;
+  optional int64 firstRuleNodeIdMSB = 5;
+  optional int64 firstRuleNodeIdLSB = 6;
+  bool root = 7;
+  bool debugMode = 8;
+  string configuration = 9;
+}
+
+message RuleChainMetadataUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 ruleChainIdMSB = 2;
+  int64 ruleChainIdLSB = 3;
+  int32 firstNodeIndex = 4;
+  repeated RuleNodeProto nodes = 5;
+  repeated NodeConnectionInfoProto connections = 6;
+  repeated RuleChainConnectionInfoProto ruleChainConnections = 7;
+}
+
+message RuleNodeProto {
+  int64 idMSB = 1;
+  int64 idLSB = 2;
+  string type = 3;
+  string name = 4;
+  bool debugMode = 5;
+  string configuration = 6;
+  string additionalInfo = 7;
+}
+
+message NodeConnectionInfoProto {
+  int32 fromIndex = 1;
+  int32 toIndex = 2;
+  string type = 3;
+}
+
+message RuleChainConnectionInfoProto {
+  int32 fromIndex = 1;
+  int64 targetRuleChainIdMSB = 2;
+  int64 targetRuleChainIdLSB = 3;
+  string type = 4;
+  string additionalInfo = 5;
+}
+
+message DashboardUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  optional int64 customerIdMSB = 4;
+  optional int64 customerIdLSB = 5;
+  string title = 6;
+  string configuration = 7;
+  optional string assignedCustomers = 8;
+}
+
+message DeviceUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  optional int64 customerIdMSB = 4;
+  optional int64 customerIdLSB = 5;
+  optional int64 deviceProfileIdMSB = 6;
+  optional int64 deviceProfileIdLSB = 7;
+  string name = 8;
+  string type = 9;
+  optional string label = 10;
+  optional string additionalInfo = 11;
+  optional string conflictName = 12; // deprecated
+  optional int64 firmwareIdMSB = 13;
+  optional int64 firmwareIdLSB = 14;
+  optional bytes deviceDataBytes = 15;
+  optional int64 softwareIdMSB = 16;
+  optional int64 softwareIdLSB = 17;
+}
+
+message DeviceProfileUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  string name = 4;
+  optional string description = 5;
+  bool default = 6;
+  string type = 7;
+  optional string transportType = 8;
+  optional string provisionType = 9;
+  int64 defaultRuleChainIdMSB = 10;
+  int64 defaultRuleChainIdLSB = 11;
+  string defaultQueueName = 12;
+  bytes profileDataBytes = 13;
+  optional string provisionDeviceKey = 14;
+  optional bytes image = 15;
+  optional int64 firmwareIdMSB = 16;
+  optional int64 firmwareIdLSB = 17;
+  optional int64 softwareIdMSB = 18;
+  optional int64 softwareIdLSB = 19;
+  optional int64 defaultDashboardIdMSB = 20;
+  optional int64 defaultDashboardIdLSB = 21;
+}
+
+message AssetProfileUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  string name = 4;
+  optional string description = 5;
+  bool default = 6;
+  int64 defaultRuleChainIdMSB = 7;
+  int64 defaultRuleChainIdLSB = 8;
+  int64 defaultDashboardIdMSB = 9;
+  int64 defaultDashboardIdLSB = 10;
+  optional string defaultQueueName = 11;
+  optional bytes image = 12;
+}
+
+message DeviceCredentialsUpdateMsg {
+  int64 deviceIdMSB = 1;
+  int64 deviceIdLSB = 2;
+  string credentialsType = 3;
+  string credentialsId = 4;
+  optional string credentialsValue = 5;
+}
+
+message AssetUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  optional int64 customerIdMSB = 4;
+  optional int64 customerIdLSB = 5;
+  string name = 6;
+  string type = 7;
+  optional string label = 8;
+  optional string additionalInfo = 9;
+  optional int64 assetProfileIdMSB = 10;
+  optional int64 assetProfileIdLSB = 11;
+}
+
+message EntityViewUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  optional int64 customerIdMSB = 4;
+  optional int64 customerIdLSB = 5;
+  string name = 6;
+  string type = 7;
+  int64 entityIdMSB = 8;
+  int64 entityIdLSB = 9;
+  EdgeEntityType entityType = 10;
+  optional string additionalInfo = 11;
+}
+
+message AlarmUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  string name = 4;
+  string type = 5;
+  string originatorType = 6;
+  string originatorName = 7;
+  string severity = 8;
+  string status = 9;
+  int64 startTs = 10;
+  int64 endTs = 11;
+  int64 ackTs = 12;
+  int64 clearTs = 13;
+  string details = 14;
+  bool propagate = 15;
+  bool propagateToOwner = 16;
+  bool propagateToTenant = 17;
+}
+
+message CustomerUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  string title = 4;
+  optional string country = 5;
+  optional string state = 6;
+  optional string city = 7;
+  optional string address = 8;
+  optional string address2 = 9;
+  optional string zip = 10;
+  optional string phone = 11;
+  optional string email = 12;
+  optional string additionalInfo = 13;
+}
+
+message RelationUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 fromIdMSB = 2;
+  int64 fromIdLSB = 3;
+  string fromEntityType = 4;
+  int64 toIdMSB = 5;
+  int64 toIdLSB = 6;
+  string toEntityType = 7;
+  string type = 8;
+  optional string typeGroup = 9;
+  string additionalInfo = 10;
+}
+
+message UserUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  optional int64 customerIdMSB = 4;
+  optional int64 customerIdLSB = 5;
+  string email = 6;
+  string authority = 7;
+  optional string firstName = 8;
+  optional string lastName = 9;
+  optional string additionalInfo = 10;
+}
+
+message WidgetsBundleUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  string title = 4;
+  string alias = 5;
+  optional bytes image = 6;
+  bool isSystem = 7;
+  optional string description = 8;
+}
+
+message WidgetTypeUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  optional string bundleAlias = 4;
+  optional string alias = 5;
+  optional string name = 6;
+  optional string descriptorJson = 7;
+  bool isSystem = 8;
+  optional string image = 9;
+  optional string description = 10;
+}
+
+message AdminSettingsUpdateMsg {
+  bool isSystem = 1;
+  string key = 2;
+  string jsonValue = 3;
+}
+
+message UserCredentialsUpdateMsg {
+  int64 userIdMSB = 1;
+  int64 userIdLSB = 2;
+  bool enabled = 3;
+  string password = 4;
+}
+
+message RuleChainMetadataRequestMsg {
+  int64 ruleChainIdMSB = 1;
+  int64 ruleChainIdLSB = 2;
+}
+
+message AttributesRequestMsg {
+  int64 entityIdMSB = 1;
+  int64 entityIdLSB = 2;
+  string entityType = 3;
+  string scope = 4;
+}
+
+message RelationRequestMsg {
+  int64 entityIdMSB = 1;
+  int64 entityIdLSB = 2;
+  string entityType = 3;
+}
+
+message UserCredentialsRequestMsg {
+  int64 userIdMSB = 1;
+  int64 userIdLSB = 2;
+}
+
+message DeviceCredentialsRequestMsg {
+  int64 deviceIdMSB = 1;
+  int64 deviceIdLSB = 2;
+}
+
+// deprecated
+message DeviceProfileDevicesRequestMsg {
+  int64 deviceProfileIdMSB = 1;
+  int64 deviceProfileIdLSB = 2;
+}
+
+message WidgetBundleTypesRequestMsg {
+  int64 widgetBundleIdMSB = 1;
+  int64 widgetBundleIdLSB = 2;
+}
+
+message EntityViewsRequestMsg {
+  int64 entityIdMSB = 1;
+  int64 entityIdLSB = 2;
+  string entityType = 3;
+}
+
+message DeviceRpcCallMsg {
+  int64 deviceIdMSB = 1;
+  int64 deviceIdLSB = 2;
+  int64 requestUuidMSB = 3;
+  int64 requestUuidLSB = 4;
+  int32 requestId = 5;
+  int64 expirationTime = 6;
+  bool oneway = 7;
+  RpcRequestMsg requestMsg = 8;
+  RpcResponseMsg responseMsg = 9;
+  optional bool persisted = 10;
+  optional int32 retries = 11;
+  optional string additionalInfo = 12;
+  optional string serviceId = 13;
+  optional string sessionId = 14;
+}
+
+message RpcRequestMsg {
+  string method = 1;
+  string params = 2;
+}
+
+message RpcResponseMsg {
+  string response = 1;
+  string error = 2;
+}
+
+enum EdgeEntityType {
+  DEVICE = 0;
+  ASSET = 1;
+}
+
+message OtaPackageUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  int64 deviceProfileIdMSB = 4;
+  int64 deviceProfileIdLSB = 5;
+  string type = 6;
+  string title = 7;
+  string version = 8;
+  string tag = 9;
+  optional string url = 10;
+  optional string fileName = 11;
+  optional string contentType = 12;
+  optional string checksumAlgorithm = 13;
+  optional string checksum = 14;
+  optional int64 dataSize = 15;
+  optional bytes data = 16;
+  optional string additionalInfo = 17;
+}
+
+message QueueUpdateMsg {
+  UpdateMsgType msgType = 1;
+  int64 idMSB = 2;
+  int64 idLSB = 3;
+  int64 tenantIdMSB = 4;
+  int64 tenantIdLSB = 5;
+  string name = 6;
+  string topic = 7;
+  int32 pollInterval = 8;
+  int32 partitions = 9;
+  bool consumerPerPartition = 10;
+  int64 packProcessingTimeout = 11;
+  SubmitStrategyProto submitStrategy = 12;
+  ProcessingStrategyProto processingStrategy = 13;
+}
+
+message SubmitStrategyProto {
+  string type = 1;
+  int32 batchSize = 2;
+}
+
+message ProcessingStrategyProto {
+  string type = 1;
+  int32 retries = 2;
+  double failurePercentage = 3;
+  int64 pauseBetweenRetries = 4;
+  int64 maxPauseBetweenRetries = 5;
+}
+
+/**
+ * Main Messages;
+ */
+
+message UplinkMsg {
+  int32 uplinkMsgId = 1;
+  repeated EntityDataProto entityData = 2;
+  repeated DeviceUpdateMsg deviceUpdateMsg = 3;
+  repeated DeviceCredentialsUpdateMsg deviceCredentialsUpdateMsg = 4;
+  repeated AlarmUpdateMsg alarmUpdateMsg = 5;
+  repeated RelationUpdateMsg relationUpdateMsg = 6;
+  repeated RuleChainMetadataRequestMsg ruleChainMetadataRequestMsg = 7;
+  repeated AttributesRequestMsg attributesRequestMsg = 8;
+  repeated RelationRequestMsg relationRequestMsg = 9;
+  repeated UserCredentialsRequestMsg userCredentialsRequestMsg = 10;
+  repeated DeviceCredentialsRequestMsg deviceCredentialsRequestMsg = 11;
+  repeated DeviceRpcCallMsg deviceRpcCallMsg = 12;
+  repeated DeviceProfileDevicesRequestMsg deviceProfileDevicesRequestMsg = 13; // deprecated
+  repeated WidgetBundleTypesRequestMsg widgetBundleTypesRequestMsg = 14;
+  repeated EntityViewsRequestMsg entityViewsRequestMsg = 15;
+}
+
+message UplinkResponseMsg {
+  bool success = 1;
+  string errorMsg = 2;
+  int32 uplinkMsgId = 3;
+}
+
+message DownlinkResponseMsg {
+  bool success = 1;
+  string errorMsg = 2;
+  int32 downlinkMsgId = 3;
+}
+
+message DownlinkMsg {
+  int32 downlinkMsgId = 1;
+  SyncCompletedMsg syncCompletedMsg = 2;
+  repeated EntityDataProto entityData = 3;
+  repeated DeviceCredentialsRequestMsg deviceCredentialsRequestMsg = 4;
+  repeated DeviceUpdateMsg deviceUpdateMsg = 5;
+  repeated DeviceProfileUpdateMsg deviceProfileUpdateMsg = 6;
+  repeated DeviceCredentialsUpdateMsg deviceCredentialsUpdateMsg = 7;
+  repeated RuleChainUpdateMsg ruleChainUpdateMsg = 8;
+  repeated RuleChainMetadataUpdateMsg ruleChainMetadataUpdateMsg = 9;
+  repeated DashboardUpdateMsg dashboardUpdateMsg = 10;
+  repeated AssetUpdateMsg assetUpdateMsg = 11;
+  repeated EntityViewUpdateMsg entityViewUpdateMsg = 12;
+  repeated AlarmUpdateMsg alarmUpdateMsg = 13;
+  repeated UserUpdateMsg userUpdateMsg = 14;
+  repeated UserCredentialsUpdateMsg userCredentialsUpdateMsg = 15;
+  repeated CustomerUpdateMsg customerUpdateMsg = 16;
+  repeated RelationUpdateMsg relationUpdateMsg = 17;
+  repeated WidgetsBundleUpdateMsg widgetsBundleUpdateMsg = 18;
+  repeated WidgetTypeUpdateMsg widgetTypeUpdateMsg = 19;
+  repeated AdminSettingsUpdateMsg adminSettingsUpdateMsg = 20;
+  repeated DeviceRpcCallMsg deviceRpcCallMsg = 21;
+  repeated OtaPackageUpdateMsg otaPackageUpdateMsg = 22;
+  repeated QueueUpdateMsg queueUpdateMsg = 23;
+  repeated AssetProfileUpdateMsg assetProfileUpdateMsg = 24;
+  EdgeConfiguration edgeConfiguration = 25;
+}
+

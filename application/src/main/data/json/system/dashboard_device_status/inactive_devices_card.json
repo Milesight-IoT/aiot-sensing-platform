@@ -1,0 +1,148 @@
+{
+  "widget": {
+    "c1f1751a-e20a-34d9-045d-b07ca13433c0": {
+      "isSystemType": true,
+      "bundleAlias": "cards",
+      "typeAlias": "markdown_card",
+      "type": "latest",
+      "title": "New widget",
+      "image": null,
+      "description": null,
+      "sizeX": 5,
+      "sizeY": 3.5,
+      "config": {
+        "datasources": [{
+          "type": "entityCount",
+          "name": null,
+          "entityAliasId": "9023e73b-0607-bd78-b5d8-c79fcf629bfa",
+          "filterId": "fe9b2e71-b0d1-1b8f-2604-337a20b0f86b",
+          "dataKeys": [{
+            "name": "count",
+            "type": "count",
+            "label": "inactiveDevicesNumber",
+            "color": "#f3212a",
+            "settings": {},
+            "_hash": 0.5409504120647088,
+            "aggregationType": null,
+            "units": null,
+            "decimals": null,
+            "funcBody": null,
+            "usePostProcessing": null,
+            "postFuncBody": null
+          }]
+        }, {
+          "type": "entityCount",
+          "name": null,
+          "entityAliasId": "9023e73b-0607-bd78-b5d8-c79fcf629bfa",
+          "filterId": null,
+          "dataKeys": [{
+            "name": "count",
+            "type": "count",
+            "label": "totalDevicesNumber",
+            "color": "#4caf50",
+            "settings": {},
+            "_hash": 0.8402163800319546,
+            "aggregationType": null,
+            "units": null,
+            "decimals": null,
+            "funcBody": null,
+            "usePostProcessing": null,
+            "postFuncBody": null
+          }]
+        }],
+        "timewindow": {
+          "displayValue": "",
+          "selectedTab": 0,
+          "realtime": {
+            "realtimeType": 1,
+            "interval": 1000,
+            "timewindowMs": 60000,
+            "quickInterval": "CURRENT_DAY"
+          },
+          "history": {
+            "historyType": 0,
+            "interval": 1000,
+            "timewindowMs": 60000,
+            "fixedTimewindow": {
+              "startTimeMs": 1681351291652,
+              "endTimeMs": 1681437691652
+            },
+            "quickInterval": "CURRENT_DAY"
+          },
+          "aggregation": {
+            "type": "AVG",
+            "limit": 25000
+          }
+        },
+        "showTitle": false,
+        "backgroundColor": "#fff",
+        "color": "rgba(0, 0, 0, 0.87)",
+        "padding": "0px",
+        "settings": {
+          "useMarkdownTextFunction": true,
+          "markdownTextFunction": "var inactiveDevicesNumber = (data[0]['inactiveDevicesNumber']).toFixed(0);\nvar totalDevicesNumber = (data[1]['totalDevicesNumber']).toFixed(0);\nvar inactiveDevicesPercent = (totalDevicesNumber ? (inactiveDevicesNumber / totalDevicesNumber * 100) : 0).toFixed(2) + '%';\n\nreturn '<div class=\\'card\\' id=\"goto-devices\">\\n' +\n    '    <div class=\\'description\\'>\\n' +\n    '        Inactive devices\\n' +\n    '    </div>\\n' +\n    '    <div class=\\'value\\'>\\n' +\n    '       <span class=\"val\">' + inactiveDevicesNumber + '</span><span class=\"percent\">' + inactiveDevicesPercent + '</span>\\n' +\n    '    </div> \\n' +\n    '</div>\\n';\n",
+          "markdownCss": ".tb-markdown-view {\n    height: 100%;\n}\n.card {\n   width: 100%;\n   height: 100%;\n   box-sizing: border-box;\n   border: 2px solid #ABADB0;\n   border-radius: 8px;\n   padding: 24px 32px;\n   display: flex;\n   flex-direction: column;\n   align-items: center;\n   justify-content: space-around;\n}\n\n.card:hover {\n    border: 2px solid #305680;\n}\n\n.card .description {\n    font-size: 14px;\n    font-weight: bold;\n    line-height: 21px;\n    text-align: center;\n    color: #FC454B;\n}\n\n.card .value {\n    font-size: 26px;\n    font-weight: bold;\n    line-height: 39px;\n    text-align: center;\n    color: #0F161D;\n}\n\n.card .value .percent {\n   font-weight: 400;\n   color: #FC454B;\n}\n\n.card .value .val {\n    padding-right: 20px;\n}\n\n@media (min-width: 960px) and (max-width: 1200px) {\n    .card .description {\n        font-size: 12px;\n        line-height: 18px;\n    }\n\n    .card .value {\n        font-size: 20px;\n        line-height: 28px;\n    }\n    \n    .card .value .percent {\n        display: none;\n    }\n\n    .card .value .val {\n        padding-right: 0px;\n    }\n}\n\n@media (min-width: 1921px) {\n    .card .description {\n        font-size: 18px;\n        line-height: 26px;\n    }\n\n    .card .value {\n        font-size: 32px;\n        line-height: 42px;\n    }\n}\n"
+        },
+        "title": "Inactive Devices Card",
+        "showTitleIcon": false,
+        "iconColor": "rgba(0, 0, 0, 0.87)",
+        "iconSize": "24px",
+        "titleTooltip": "",
+        "dropShadow": false,
+        "enableFullscreen": false,
+        "widgetStyle": {},
+        "titleStyle": {
+          "fontSize": "16px",
+          "fontWeight": 400
+        },
+        "showLegend": false,
+        "useDashboardTimewindow": true,
+        "widgetCss": "",
+        "pageSize": 1024,
+        "noDataDisplayMessage": "",
+        "actions": {
+          "elementClick": [{
+            "name": "goto-devices",
+            "icon": "more_horiz",
+            "useShowWidgetActionFunction": null,
+            "showWidgetActionFunction": "return true;",
+            "type": "openDashboardState",
+            "targetDashboardStateId": "inactive_devices",
+            "setEntityId": true,
+            "stateEntityParamName": null,
+            "openRightLayout": false,
+            "dialogTitle": "",
+            "dialogHideDashboardToolbar": true,
+            "dialogWidth": null,
+            "dialogHeight": null,
+            "openInSeparateDialog": true,
+            "openInPopover": false,
+            "id": "f7f371b1-fc15-a90f-a7e2-0d1c8a6dc66e"
+          }, {
+            "name": "goto-alarms",
+            "icon": "notifications",
+            "useShowWidgetActionFunction": null,
+            "showWidgetActionFunction": "return true;",
+            "type": "openDashboardState",
+            "targetDashboardStateId": "inactive_devices_alarms",
+            "setEntityId": true,
+            "stateEntityParamName": null,
+            "openRightLayout": false,
+            "popoverPreferredPlacement": "top",
+            "popoverHideOnClickOutside": true,
+            "popoverHideDashboardToolbar": true,
+            "popoverWidth": "760px",
+            "popoverHeight": "760px",
+            "popoverStyle": {},
+            "openInSeparateDialog": false,
+            "openInPopover": true,
+            "id": "985d4f7d-1e5d-f541-9c7f-5b35adf2521c"
+          }]
+        }
+      },
+      "row": 0,
+      "col": 0,
+      "id": "c1f1751a-e20a-34d9-045d-b07ca13433c0"
+    }
+  }
+}

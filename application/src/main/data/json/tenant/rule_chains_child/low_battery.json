@@ -1,0 +1,31 @@
+{
+  "ruleChain": {
+    "additionalInfo": null,
+    "name": "Root Low Battery",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.customize.bridge.TbBridgeNode",
+        "name": "Root Low Battery Node",
+        "configuration": {
+          "path": true
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 300,
+          "layoutY": 150
+        },
+        "debugMode": false
+      }
+    ],
+    "connections": [
+    ],
+    "firstNodeIndex": 0
+  }
+}

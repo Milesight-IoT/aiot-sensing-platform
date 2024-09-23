@@ -1,0 +1,101 @@
+{
+  "ruleChain": {
+    "additionalInfo": null,
+    "name": "Root Once Result Recognized",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "nodes":[
+      {
+        "type": "org.thingsboard.rule.engine.customize.http.TbRoiTypeSwitchNode",
+        "name": "roi message type switch",
+        "configuration": {
+          "version": 0
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 337,
+          "layoutY": 152
+        },
+        "debugMode": false,
+        "singletonMode": false
+      },
+      {
+        "type": "org.thingsboard.rule.engine.customize.http.RoiRestCallNode",
+        "name": "roi rest api call",
+        "configuration": {
+          "restEndpointUrlPattern": "http://localhost/api",
+          "requestMethod": "POST",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "useSimpleClientHttpFactory": false,
+          "readTimeoutMs": 0,
+          "maxParallelRequestsCount": 0,
+          "useRedisQueueForMsgPersistence": false,
+          "trimDoubleQuotes": false,
+          "enableProxy": false,
+          "useSystemProxyProperties": false,
+          "proxyHost": null,
+          "proxyPort": 0,
+          "proxyUser": null,
+          "proxyPassword": null,
+          "proxyScheme": null,
+          "credentials": {
+            "type": "anonymous"
+          },
+          "ignoreRequestBody": false
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 729,
+          "layoutY": 258
+        },
+        "debugMode": false,
+        "singletonMode": false
+      },
+      {
+        "type": "org.thingsboard.rule.engine.customize.http.RoiMqttNode",
+        "name": "roi mqtt",
+        "configuration": {
+          "topicPattern": "my-topic",
+          "host": null,
+          "port": 1883,
+          "connectTimeoutSec": 10,
+          "clientId": null,
+          "appendClientIdSuffix": false,
+          "retainedMessage": false,
+          "cleanSession": true,
+          "ssl": false,
+          "credentials": {
+            "type": "anonymous"
+          }
+        },
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 727,
+          "layoutY": 77
+        },
+        "debugMode": false,
+        "singletonMode": false
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "HTTP Post"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 2,
+        "type": "MQTT"
+      }
+    ],
+    "firstNodeIndex": 0
+  }
+}

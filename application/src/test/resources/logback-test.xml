@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  ~ Copyright © 2016-2023 The Thingsboard Authors
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--    <logger name="org.thingsboard.server.service.subscription" level="TRACE"/>-->
+    <logger name="org.thingsboard.server.controller.TbTestWebSocketClient" level="INFO"/>
+    <logger name="org.thingsboard.server" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.boot.test" level="WARN"/>
+    <logger name="org.apache.cassandra" level="WARN"/>
+    <logger name="org.testcontainers" level="INFO" />
+    <logger name="org.eclipse.leshan" level="INFO"/>
+    <logger name="org.thingsboard.server.controller.AbstractWebTest" level="INFO"/>
+
+
+    <!-- mute TelemetryEdgeSqlTest that causes a lot of randomly generated errors -->
+    <logger name="org.thingsboard.server.service.edge.rpc.EdgeGrpcSession" level="OFF"/>
+
+    <!--    LwM2m lifecycle debug for the test scope -->
+    <logger name="org.thingsboard.server.transport.lwm2m.server.downlink.DefaultLwM2mDownlinkMsgHandler" level="TRACE"/>
+    <logger name="org.thingsboard.server.transport.lwm2m.server.uplink.DefaultLwM2mUplinkMsgHandler" level="TRACE"/>
+    <logger name="org.thingsboard.server.transport.lwm2m.server.ota.DefaultLwM2MOtaUpdateService" level="TRACE"/>
+    <logger name="org.thingsboard.server.transport.lwm2m.server" level="INFO"/>
+    <logger name="org.eclipse.californium.core" level="INFO"/>
+
+    <root level="WARN">
+        <appender-ref ref="console"/>
+    </root>
+
+</configuration>

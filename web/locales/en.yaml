@@ -1,0 +1,329 @@
+Devices become inactive: Devices become inactive
+GPS: GPS
+Low battery: Low battery
+Once data received: Once data received
+Send to recipients: Send to recipients
+Show on widget: Show on widget
+alarmIn: Alarm In
+Once result recognized: Once result recognized
+auth:
+  atLeast: 'At least:'
+  changePwd: Change Password
+  confirmNewPwd: Confirm new password
+  curPwd: Current password
+  incorrectPwd: Incorrect password!
+  invalidPwd: Password did not meet requirements!
+  login: Login
+  newPwd: New password
+  pwdDisMatch: New password did not match!
+  pwdLimit1: 8 characters
+  pwdLimit2: '2 types of characters: numbers, letters and symbols'
+battery: Battery
+buttons:
+  add: Add
+  cancel: Cancel
+  clear: Clear
+  close: Close
+  confirm: Confirm
+  copy: Copy
+  delete: Delete
+  discard: Discard
+  download: Download
+  exitfullscreen: ExitFullscreen
+  fullscreen: FullScreen
+  hscloseAllTabs: closeAllTabs
+  hscloseCurrentTab: closeCurrentTab
+  hscloseLeftTabs: closeLeftTabs
+  hscloseOtherTabs: closeOtherTabs
+  hscloseRightTabs: closeRightTabs
+  hscontentExitFullScreen: Content Exit Full Screen
+  hscontentFullScreen: Content Full Screen
+  hsreload: Reload
+  hswholeExitFullScreen: Exit Full Screen
+  hswholeFullScreen: Full Screen
+  login: Login
+  loginOut: LoginOut
+  'no': 'No'
+  ok: OK
+  reload: Reload
+  save: Save
+  search: Search
+  security: Security
+  'yes': 'Yes'
+common:
+  coordinate: Coordinate
+  createdTime: Created time
+  detail: Detail
+  details: Details
+  fileName: File name
+  key: Key
+  name: Name
+  noImg: No image
+  errorImg: Image error
+  password: Password
+  requireFailed: Required failed!
+  requiredField: Required Field!
+  status: Status
+  timeRange: Time range
+  type: Type
+  typeOfSearch: type of search
+  updatedTime: updated time
+  username: User name
+  value: Value
+  version: Version
+dashboard:
+  addNewDashboard: Add a new dashboard
+  alarmTable: Alarm table
+  alarmTableDescription: Visualization of alarms in real time.
+  details: Dashboard Details
+  delTips: >-
+    Be careful, after the confirmation the dashboard and all related data will
+    become unrecoverable.
+  devicesStatus: Devices status
+  devicesStatusDescription: Show the status of all devices.
+  exist: Dashboard already exists!
+  imageSensingChannel: Image Sensing Channel
+  makeDashboardPublic: Make the dashboard public
+  multiDelTips: >-
+    Be careful, after the confirmation all selected dashboards will be removed
+    and all related data will become unrecoverable.
+  pleaseEnterDashboardName: Please enter the dashboard name
+  pleaseEnterImageSenseChannel: Please select 1 image channel of the sensing object
+  public: Public
+  publicLink: Public Link
+  selectOneTips: '%s dashboard selected'
+  selectTips: '%s dashboards selected'
+  selectWidgets: Select widgets
+  snapshotPreview: Snapshot preview
+  snapshotPreviewDescription: Update snapshots from the image channel of one sensing object in real time.
+  source: Source
+  sureDel: Are you sure you want to delete the dashboard '%s'?
+  sureDelOne: Are you sure you want to delete %s dashboard?
+  sureDels: Are you sure you want to delete %s dashboards?
+  widgetSnapshotPreview: 'Widget: Snapshot preview'
+device:
+  addNewDevice: Add a new device
+  addRoi: Add a new ROI
+  attrExist: Attribute already exists!
+  attrRecogniz: Attributes to be recognized
+  channelName: Channel Name
+  clearObjectBeforeDelRoi: Please clear the association with the object first before deleting it.
+  delItemsFailed: >-
+    Failed to delete the following devices,because of the association with the
+    objects.
+  delRoiTips: >-
+    Be careful, after the confirmation the ROI and all related data will become
+    unrecoverable.
+  deleteSelTips: '%s device selected'
+  deleteSensingTips: Please clear the association and then delete the device.
+  deleteTips: >-
+    Be careful, after the confirmation the device and all related data will
+    become unrecoverable.
+  deletesSelTips: '%s devices selected'
+  details: Device details
+  existDevice: Device already exists!
+  existRoi: ROI already exists!
+  fullImg: Full Image
+  imgChannel: Image channels
+  imgRegAbility: Image recognition ability
+  invalidSN: Please enter a correct SN!
+  jumpToObj: Jump to Object
+  lastUpdateTime: Last update time
+  latestTelemetry: Latest telemetry
+  license: License Plate
+  list: Devices List
+  model: Device model
+  plateColor: Plate Color
+  plateType: Plate Type
+  pleaseDrawRoi: Please draw an area first!
+  pleaseEnterAttrs: Please add less than 5 attributes to be recognized
+  pleaseEnterChannelName: Please enter the channel name of the ROI
+  pleaseEnterDeviceName: Please enter the device name
+  pleaseEnterReplaceSN: >-
+    Please enter the SN of the replacement device and make sure it is the same
+    model.
+  pleaseEnterSN: Please enter the SN of the device
+  pleaseSelectModel: Please select the model of the device
+  replace: Replace the device
+  setImgRoi: Set less than 5 ROIs to recognize the attributes.
+  setNewRoi: Set a new ROI
+  setRoi: Set a new ROI
+  sn: Device SN
+  sureDelDevice: Are you sure you want to delete %s device?
+  sureDelDevices: Are you sure you want to delete %s devices?
+  sureDelDevicesTips: >-
+    Be careful, after the confirmation all selected devices will be removed and
+    all related data will become unrecoverable.
+  sureDelRoi: Are you sure you want to delete the ROI '%s'?
+  sureDelRoiWithObject: The ROI '%s' has been associated with the Object ‘%s1’?
+  sureDelete: Are you sure you want to delete the device %s?
+  sureDeleteSensing: The device %s has been associated with the object %s1!
+  sureReplace: Are you sure you want to replace the device?
+  vehicleType: Vehicle Type
+error:
+  netError: Network error!
+forgetPwd: Forget Password
+image: Image
+menus:
+  dashboard: Dashboards
+  dashboards: Dashboards
+  devices: Devices
+  hshome: Home
+  login: Login
+  objects: Objects
+  otaUpdates: OTA Updates
+  recipients: Recipients
+  rules: Rules
+  systemSettings: System Settings
+noMatchData: No matching data
+object:
+  addNewObject: Add a new sensing object
+  artificialRecognize: Artificial recognize
+  dataSel: '%s data selected'
+  datasSel: '%s data selected'
+  deleteSelTips: Are you sure you want to delete %s sensing object?
+  deleteTips: >-
+    Be careful, after the confirmation the sensing object and all related data
+    will become unrecoverable. Associated rules and dashboard widgets will
+    become invalid.
+  deletesSelTips: '%s sensing objects selected'
+  details: Sensing object details
+  existSensingObject: Sensing object already exists!
+  imgPreview: Image preview
+  list: Sensing objects list
+  noAssociatChannel: No associated channel
+  oneSelObject: '%s sensing object selected'
+  pleaseEnterObjectName: Please enter the sensing object name
+  pleaseSelectChannels: Please associate less than 9 sensing channels from devices
+  sensingChannel: Sensing channel
+  sensingChannels: Sensing channels
+  sensingData: Sensing Data
+  sureDelete: Are you sure you want to delete the sensing object %s?
+  sureDeleteObject: Are you sure you want to delete %s sensing object?
+  sureDeleteObjects: Are you sure you want to delete %s sensing objects?
+  sureDeletesTips: >-
+    Be careful, after the confirmation all selected sensing objects and and all
+    related data will become unrecoverable. Associated rules and dashboard
+    widgets will become invalid.
+ota:
+  addPackage: Add a new package
+  checkSum: Checksum
+  click2Upload: click to upload
+  configFile: Configuration file
+  deleteSelTips: '%s package selected'
+  deletesSelTips: '%s packages selected'
+  distribute2all: Distribute to all devices of the model.
+  distributeAll: Distribute all devices
+  dropFile: Drop file here or
+  errorFileTips: Please upload the correct package file!
+  firmware: Firmware
+  packageExist: Package already exists!
+  packageRepos: Package repository
+  pkgExist: Packge already exists!
+  pleaseEnterVersion: Please enter the vrsion
+  pleaseSelectConfig: Please select a configuration file to upgrade
+  pleaseSelectModel: Please select matching model
+  pleaseSelectOta: Please select a firmware to upgrade
+  pleaseUploadPkg: Please upload the package file first!
+  sizeLimit: Package size > 200MB!
+  sureDelete: Are you sure you want to delete the package '%s'?
+  sureDeleteOta: Are you sure you want to delete %s package?
+  sureDeleteOtas: Are you sure you want to delete %s packages?
+  sureDeleteTips: Be careful, after the confirmation the package will be removed
+  sureDeletesTips: Be careful, after the confirmation the all selected packages will be removed
+  update: OTA Update
+  fileNameLimit: Only file with English name is supported!
+recip:
+  addNewRecipient: Add a new recipient
+  delItemsFailed: >-
+    Failed to delete the following recipients,because of the association with
+    the rules.
+  delRecipientTips: >-
+    Be careful, after the confirmation all selected recipients will be removed
+    and all related data will become unrecoverable.
+  deleteSensingTips: Please clear the association and then delete the recipient.
+  deleteTips: >-
+    Be careful, after the confirmation the recipient and all related data will
+    become unrecoverable.
+  details: Recipient details
+  host: Host
+  httpPost: HTTP Post
+  jumpToRule: Jump to Rules
+  list: Recipients list
+  mqtt: MQTT
+  nameExist: Recipient already exists!
+  pleaseClearRule: Please clear the association and then delete the recipient.
+  pleaseEnterHost: Please enter the port of the host (1~65535)
+  pleaseEnterName: Please enter the recipient name
+  pleaseEnterTopic: Please enter the topic of MQTT
+  port: Port
+  selectOneTips: '%s recipient selected'
+  selectTips: '%s recipients selected'
+  sureDelOne: Are you sure you want to delete %s recipient?
+  sureDelete: Are you sure you want to delete the recipient '%s'?
+  sureDeleteSensing: The recipient %s has been associated with the rule %s1!
+  sureDels: Are you sure you want to delete %s recipients?
+  topic: Topic
+  transProtocol: Transmission protocol
+  url: URL
+rememberMe: Remember Me
+rules:
+  action: Action
+  actions: Actions
+  addNewRule: Add a new rule
+  anyChannels: Any channels
+  anyDevices: Please select source devices
+  delTips: >-
+    Be careful, after the confirmation the rule and all related data will become
+    unrecoverable.
+  details: Rule details
+  deviceInactive: Devices become inactive
+  existRule: Rule already exists!
+  list: Rules List
+  lowBattery: Low battery
+  multiDelTips: >-
+    Be careful, after the confirmation all selected rules will be removed and
+    all related data will become unrecoverable.
+  onceReceive: Once data received
+  pleaseEnterRuleName: Please enter the rule name
+  pleaseSelChannels: Please select source sensing objects
+  pleaseSelAction: Please select actions
+  pleaseSelRecipients: Please select less than 5 recipients
+  selectOneTips: '%s rule selected'
+  selectTips: '%s rules selected'
+  send2Recipients: Send to recipients
+  showOnWidget: Show on widget
+  srcDevice: Source devices
+  srcSensingChannels: Source sensing channels
+  srcSensingObjects: Source sensing objects
+  sureDel: Are you sure you want to delete the rule '%s'?
+  sureDelOne: Are you sure you want to delete %s rule?
+  sureDels: Are you sure you want to delete %s rules?
+  threshold: Threshold(%)
+  trigger: Trigger
+  onceResultRecognized: Once result recognized
+  roiChannels: ROI Channels
+  pleaseSelectChannels: Please select ROI Channels of the devices.
+sensingPlatform: AIoT Sensing Platform
+status:
+  active: Active
+  destributing: Distributing
+  hsLoad: Loading
+  inactive: Inactive
+  load: Loading...
+  loginFailed: Incorrect username or password !
+  success: Success!
+widget:
+  activeDevices: Active Devices
+  alarmTable: 'Widget: Alarm table'
+  deleteTips: >-
+    After the confirmation the widget and all related data will become
+    unrecoverable.
+  deviceStatus: 'Widget: Device status'
+  inactiveDevices: Inactvie Devices
+  snapshotPreview: 'Widget: Snapshot preview'
+  statusType: Status Type
+  sureDelete: Are you sure you want to delete the widget?
+  totalDevices: Total Devices
+ruleTips:
+  validRange: 'Valid range'
