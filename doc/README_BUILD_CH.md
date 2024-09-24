@@ -59,7 +59,7 @@
 #### 克隆仓库
 
 ```
-
+https://github.com/Milesight-IoT/aiot-sensing-platform.git
 ```
 
 #### 进入项目目录

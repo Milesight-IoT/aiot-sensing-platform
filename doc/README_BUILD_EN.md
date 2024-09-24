@@ -57,7 +57,7 @@
 #### Fork the Repository
 
 ```
-
+https://github.com/Milesight-IoT/aiot-sensing-platform.git
 ```
 
 #### Go to Project Directory

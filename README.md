@@ -47,7 +47,7 @@ Moreover, AIoT Sensing Platform can integrate with AIoT Inference Platform to re
 
 ```
 # Download image
-wget https://****/msaiotsensingplatform.tar
+wget https://github.com/Milesight-IoT/aiot-sensing-platform/1.0.1.1-r4/msaiotsensingplatform.tar
 # Load docker image
 docker load -i msaiotsensingplatform.tar
 ```

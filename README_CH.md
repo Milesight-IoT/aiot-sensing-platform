@@ -52,7 +52,7 @@
 
 ```
 # 下载镜像
-wget https://****/msaiotsensingplatform.tar
+wget https://github.com/Milesight-IoT/aiot-sensing-platform/1.0.1.1-r4/msaiotsensingplatform.tar
 # 加载docker镜像
 docker load -i msaiotsensingplatform.tar
 ```
