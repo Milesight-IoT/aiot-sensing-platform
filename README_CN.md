@@ -1,6 +1,6 @@
 # 感知平台
 
-![dashboard.png](doc/img/dashboard.png)
+![dashboard_cn.png](doc/img/dashboard_cn.png)
 
 感知平台是基于Thingsboard（v3.5）开源项目二次开发的一个产品，支持通过MQTT 协议搜集和存储来自感知相机的图片数据，以及实现批量远程管理和维护感知相机的功能。
 
@@ -52,7 +52,7 @@
 
 ```
 # 下载镜像
-wget https://github.com/Milesight-IoT/aiot-sensing-platform/1.0.1.1-r4/msaiotsensingplatform.tar
+wget https://github.com/Milesight-IoT/aiot-sensing-platform/releases/download/1.0.1.1-r4/msaiotsensingplatform.tar
 # 加载docker镜像
 docker load -i msaiotsensingplatform.tar
 ```
@@ -71,7 +71,7 @@ version: '3.0'
 services:
   mysp:
     restart: always
-    image: "msaiotsensingplatform:demo"
+    image: "msaiotsensingplatform:1.0.1.1-r4"
     ports:
       - "5220:9090"
       - "1883:1883"
@@ -88,7 +88,8 @@ services:
 
 ```
 sudo useradd -m msaiotsensingplatform
-sudo groupadd msaiotsensingplatform（提示已存在忽略）
+# 提示已存在忽略
+sudo groupadd msaiotsensingplatform
 sudo usermod -aG msaiotsensingplatform msaiotsensingplatform
 mkdir -p /var/mysp-data && sudo chown -R msaiotsensingplatform:msaiotsensingplatform /var/mysp-data
 chmod -R 777 /var/mysp-data

@@ -355,7 +355,8 @@ services:
 
 ```
 sudo useradd -m msaiotsensingplatform
-sudo groupadd msaiotsensingplatform（提示已存在忽略）
+# 提示已存在忽略
+sudo groupadd msaiotsensingplatform 
 sudo usermod -aG msaiotsensingplatform msaiotsensingplatform
 mkdir -p /var/mysp-data && sudo chown -R msaiotsensingplatform:msaiotsensingplatform /var/mysp-data
 chmod -R 777 /var/mysp-data
