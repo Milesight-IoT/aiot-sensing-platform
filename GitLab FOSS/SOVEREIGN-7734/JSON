@@ -1,0 +1,74 @@
+Berikut ialah struktur skema data lengkap (Full Data Schema Specification) bagi projek AIoT anda. Maklumat ini merangkumi format JSON terperinci, jenis data (data types), had julat operasi (operational thresholds), dan kamus data untuk rujukan pembangunan sistem (database & dashboard integration).
+
+📊 1. Spesifikasi Payload JSON (Telemetry & Inference)
+
+Data yang dihantar oleh peranti edge ke cloud/broker distrukturkan dalam format JSON berikut untuk memastikan kecekapan storan dan kemudahan analisis (parsing):
+json
+{
+  "device_id": "aiot-edge-node-01",
+  "timestamp": 1792501200000,
+  "metrics": {
+    "temperature": 45.23,
+    "vibration": 0.412
+  },
+  "edge_inference": {
+    "anomaly_detected": false,
+    "confidence": 0.0342,
+    "model_version": "v1.2.0-light"
+  },
+  "network": {
+    "rssi": -65,
+    "battery_level": 88.5
+  }
+}
+Use code with caution.
+
+🗂️ 2. Kamus Data (Data Dictionary)
+
+
+Nama Medan (Field Name)	Jenis Data	Penerangan	Contoh Nilai
+device_id	String	Identiti unik bagi setiap peranti AIoT edge node.	"aiot-edge-node-01"
+timestamp	Long	Masa data diambil dalam format Epoch Unix Milliseconds (UTC).	1792501200000
+metrics.temperature	Float	Bacaan suhu semasa peranti/mesin dalam unit Celsius (°C).	45.23
+metrics.vibration	Float	Tahap getaran paksi (g-force) yang dikesan oleh penderia accelerometer.	0.412
+edge_inference.anomaly_detected	Boolean	Keputusan model AI tempatan sama ada ralat/anomali berlaku (true atau false).	false
+edge_inference.confidence	Float	Tahap keyakinan model AI terhadap keputusan yang dibuat (Julat: 0.0 hingga 1.0).	0.0342
+edge_inference.model_version	String	Versi model ML (Machine Learning) yang sedang aktif di peranti edge.	"v1.2.0-light"
+network.rssi	Integer	Kekuatan isyarat rangkaian Wi-Fi/Selular dalam unit dBm (Semakin dekat dengan 0, semakin kuat).	-65
+network.battery_level	Float	Baki kapasiti bateri peranti dalam bentuk peratusan (%).	88.5
+
+
+⚠️ 3. Had Julat Operasi & Logik Pengiraan (Thresholds & Logic)
+
+Sistem Edge AI menggunakan kombinasi logik ambang (threshold) dan model statistik untuk mencetuskan status anomali:
+• Suhu (Temperature):
+	• Normal: < 65.0 °C
+	• Amaran (Warning): 65.0 °C – 75.0 °C
+	• Kritikal (Critical): > 75.0 °C (Model AI akan mengesahkan kesahihan anomali bagi mengelakkan false alarm).
+• Getaran (Vibration):
+	• Normal: < 0.60 g
+	• Amaran (Warning): 0.60 g – 0.85 g
+	• Kritikal (Critical): > 0.85 g
+
+💾 4. Struktur Jadual Pangkalan Data (SQL DDL Recommendation)
+
+Jika anda ingin menyimpan maklumat data lengkap ini ke dalam pangkalan data hubungan (RDBMS) seperti PostgreSQL atau MySQL, berikut adalah struktur jadual yang disyorkan:
+sql
+CREATE TABLE aiot_telemetry (
+    id SERIAL PRIMARY KEY,
+    device_id VARCHAR(50) NOT NULL,
+    recorded_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    temperature NUMERIC(5, 2),
+    vibration NUMERIC(4, 3),
+    anomaly_detected BOOLEAN DEFAULT FALSE,
+    ai_confidence NUMERIC(5, 4),
+    model_version VARCHAR(20),
+    rssi INT,
+    battery_level NUMERIC(4, 1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Index untuk carian pantas berasaskan masa dan peranti
+CREATE INDEX idx_device_time ON aiot_telemetry(device_id, recorded_at DESC);
+Use code with caution.
+Adakah maklumat data lengkap ini mencukupi untuk keperluan anda? Jika anda mahu, saya boleh sediakan skrip Python untuk menjana data simulasi (Mock Data Generator) mengikut format di atas bagi tujuan ujian beban sistem (load testing).

@@ -1,0 +1,508 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
+To translate your android.yml file from Welsh, please paste the contents of the file or upload its text here.
+Once you provide the content, I will translate the Welsh text values into English (or your preferred target language) while keeping all the YAML keys, structure, and formatting completely intact.
+If you are looking for automated tools to translate or convert localization files, you can also use online platforms like SimpleLocalize or Localazy to convert or auto-translate your strings.
+Please paste the YAML content below, and let me know:
+• What target language would you like to translate it into? (English is assumed unless you specify otherwise).
+This android.yml file is a GitHub Actions workflow configuration for continuous integration (CI)—it is already entirely in English and does not contain any Welsh language content to translate.
+If this configuration file isn't working as expected or if you intended to translate an Android app localization file (like a strings.xml or a separate translation file), please let me know.
+Otherwise, this workflow file is fully valid and ready to use in your .github/workflows/ directory:
+yaml
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
+Use code with caution.
+Would you like help with modifying this CI workflow (e.g., changing the Java version, upgrading dependencies), or did you mean to upload a different localization/translation file?
+Copying...
+Since you mentioned "Next" following our discussion about your CI workflow, here are a few structural upgrades you can apply to make this configuration future-proof and robust.
+
+Recommended Workflow Improvements
+
+1. Upgrade Deprecated Actions: Versions v1 through v4 of actions/setup-java are deprecated. You should transition your workflow to use actions/setup-java@v6, which resolves modern runner download issues. Similarly, actions/checkout@v6 is now available and introduces better credential security controls. [1] (https://github.com/actions/setup-java), [2] (https://github.com/marketplace/actions/setup-java-jdk), [3] (https://www.reddit.com/r/devops/comments/1x52qgg/github_actions_selfhosted_runner_gets_stuck/), [4] (https://github.com/actions/checkout/blob/main/README.md?plain=1)
+2. Consider a Modern Java Version: Android development has largely shifted toward modern runtimes. If your project supports it, consider changing java-version: '11' to a newer long-term support (LTS) release like '17' or '21'. [1] (https://dev.to/rohithv07/automating-java-builds-with-github-actions-4c0m), [2] (https://github.com/marketplace/actions/setup-java-jdk)
+Here is the updated and modernized version of your android.yml configuration file:
+yaml
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v6
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build
+Use code with caution.
+If you want to continue optimizing this pipeline, let me know:
+• Do you need to add caching optimizations to speed up your build times?
+• Should we set up steps to automatically run unit tests or generate test coverage reports?
+• Do you need this pipeline to build and output a signed release APK / AAB bundle?
+If you are ready to move forward, here are the most common automated steps you can add to your pipeline next:
+
+1. Run Unit Tests Automatically
+
+To ensure code changes don't break functionality, add this block after the permission step to execute your local JUnit tests during every pull request:
+yaml
+    - name: Run Unit Tests
+      run: ./gradlew testDebugUnitTest
+Use code with caution.
+
+2. Generate a Debug APK
+
+If you want GitHub Actions to compile your application and provide a shareable app file for testing, add these steps to build and save the artifact:
+yaml
+    - name: Assemble Debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+Use code with caution.
+Which of these updates would you like to integrate into your script next, or do you have a different automation task you want to tackle?
+To continue refining your Android automation pipeline, the logical next step is to configure Lint checks and caching enhancements to ensure code quality and faster execution times.
+
+1. Run Static Code Analysis (Lint)
+
+To catch structural and optimization bugs automatically before code gets merged, add the following step right before your build or test commands:
+yaml
+    - name: Run Android Lint
+      run: ./gradlew lintDebug
+Use code with caution.
+
+2. Verify Dependency Caching
+
+While actions/setup-java handles basic Gradle caching, long-running pipelines can sometimes run into cache limits. If you notice your builds slowing down over time, you can explicitly configure an advanced caching block or utilize a dedicated Gradle action to drastically reduce compilation overhead.
+Here is the complete, production-grade android.yml incorporating linting, testing, and artifact generation:
+yaml
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v6
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Run Android Lint
+      run: ./gradlew lintDebug
+
+    - name: Run Unit Tests
+      run: ./gradlew testDebugUnitTest
+
+    - name: Build and Assemble Debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+Use code with caution.
+Would you like to move on to setting up Continuous Deployment (CD) next, such as:
+• Automatically signing your app with a keystore file?
+• Uploading your build directly to the Google Play Console (Internal Sharing / Alpha)?
+• Setting up automated UI testing via Firebase Test Lab?
+To complete your Android automation pipeline, let's look at how to handle securely signing your application and uploading it to Google Play Store internal tracks.
+Because code signing requires secret keys, you must never hardcode credentials into your YAML file. Instead, you will use GitHub Secrets to pass your production keystore safely.
+
+Production Pipeline Example (With Signing & Upload)
+
+Add this configuration to the end of your workflow file to generate a signed Android App Bundle (.aab) and publish it:
+yaml
+    - name: Build Signed Release App Bundle
+      run: ./gradlew bundleRelease
+      env:
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+    - name: Upload to Google Play Internal Track
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        packageName: com.yourcompany.yourapp
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab
+        track: internal
+Use code with caution.
+
+🔒 Required GitHub Secrets
+
+To make this work, navigate to your repository's Settings > Secrets and variables > Actions and add:
+• KEYSTORE_PASSWORD: The password to your production keystore file.
+• KEY_ALIAS: The specific alias name inside your keystore.
+• KEY_PASSWORD: The password for your key alias.
+• PLAY_SERVICE_ACCOUNT_JSON: The API access JSON credentials generated from your Google Play Console account.
+Are you ready to test this pipeline in your repository, or do you need help generating the Google Play service account JSON key?
+Copying...
+To get your Google Play service account JSON key ready for GitHub Secrets, you need to link your Google Cloud Platform (GCP) console to your Google Play Console.
+Here are the precise steps to generate and retrieve that credential file:
+
+Step 1: Create a Service Account in Google Cloud
+
+1. Open the Google Cloud Console (IAM & Admin).
+2. Select the GCP project linked to your Google Play Console apps (or create a new one).
+3. Click Create Service Account at the top.
+4. Provide a name (e.g., github-actions-publisher) and click Create and Continue.
+5. Assign the role Service Account User (or leave roles blank, as permissions will be handled on the Play Console side) and click Done.
+
+Step 2: Generate the JSON Key File
+
+1. In the Service Accounts list, click on the Email address of the service account you just created.
+2. Navigate to the Keys tab.
+3. Click Add Key > Create new key.
+4. Select JSON as the key type and click Create.
+5. A .json file will automatically download to your computer. Keep this file secure, as it contains absolute access keys to your app distribution channels.
+
+Step 3: Grant Access in Google Play Console
+
+1. Log into your Google Play Console.
+2. Go to Users and permissions in the left sidebar menu.
+3. Click Invite new users.
+4. Paste the Email address of your Google Cloud service account.
+5. Go to the App permissions tab, add your specific app, and grant it permissions to Create and edit draft apps and Manage testing tracks.
+6. Click Invite user.
+
+Step 4: Add to GitHub
+
+1. Open your downloaded .json file in a text editor and copy the entire text block.
+2. Go to your GitHub repository > Settings > Secrets and variables > Actions.
+3. Create a new repository secret named PLAY_SERVICE_ACCOUNT_JSON and paste the exact text block content as the secret value.
+Once this is saved, your workflow will be completely automated. Do you want to review the full, combined android.yml configuration script containing all the linting, testing, and deployment blocks we built?
+Here is your complete, production-grade android.yml file. It combines all the optimizations we discussed—including dependency caching, code linting, unit testing, asset compilation, and automated publishing to the Google Play Store internal track.
+yaml
+name: Android CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout the source code
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    # 2. Initialize the modern Java environment with automatic Gradle caching
+    - name: Set up JDK 17
+      uses: actions/setup-java@v6
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    # 3. Secure necessary execution permissions for the Gradle wrapper
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # 4. Perform static code analysis to catch bugs early
+    - name: Run Android Lint
+      run: ./gradlew lintDebug
+
+    # 5. Run local JUnit unit tests
+    - name: Run Unit Tests
+      run: ./gradlew testDebugUnitTest
+
+    # 6. Assemble an un-signed Debug APK for manual internal testing
+    - name: Build and Assemble Debug APK
+      run: ./gradlew assembleDebug
+
+    # 7. Persist the Debug APK on GitHub so your team can download it directly
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+
+    # 8. Generate the Production Release Android App Bundle (.aab)
+    # Ensure your project's build.gradle is configured to ingest these env variables
+    - name: Build Signed Release App Bundle
+      run: ./gradlew bundleRelease
+      env:
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+    # 9. Deploy the production bundle seamlessly to the Google Play Internal Track
+    - name: Upload to Google Play Internal Track
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        packageName: com.yourcompany.yourapp  # Replace with your actual application package ID
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab
+        track: internal
+Use code with caution.
+
+💡 Pro-Tip before pushing this file:
+
+Ensure that your app/build.gradle file is configured to grab the keystore environment variables (like System.getenv("KEYSTORE_PASSWORD")) in its signingConfigs block. This allows Gradle to sign the bundle on the runner machine without exposing passwords.
+Would you like help setting up the signingConfigs configuration inside your build.gradle file so it reads these environment variables properly, or are you ready to commit this workflow?
+To allow the GitHub Actions runner to sign your production release build securely, you need to update your app/build.gradle (or app/build.gradle.kts) file to pull the secret keys from the runner's environment variables.
+Here is how you can set up the signingConfigs and buildTypes blocks depending on which build language your project uses:
+
+Option A: If using Groovy (app/build.gradle)
+
+Open your app-level build.gradle file and update it like this:
+groovy
+android {
+    ...
+    signingConfigs {
+        release {
+            // Read from GitHub environment variables first; fall back to local properties if testing locally
+            def keystoreFile = rootProject.file("release.keystore") // Ensure your keystore is in the project root or configure its path
+            
+            storeFile keystoreFile
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: localProperties.getProperty("keystore.password")
+            keyAlias System.getenv("KEY_ALIAS") ?: localProperties.getProperty("key.alias")
+            keyPassword System.getenv("KEY_PASSWORD") ?: localProperties.getProperty("key.password")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Attach the signing configuration to your release build
+            signingConfig signingConfigs.release
+        }
+    }
+}
+Use code with caution.
+
+Option B: If using Kotlin DSL (app/build.gradle.kts)
+
+If your project uses Kotlin script configurations, write it like this instead:
+kotlin
+android {
+    ...
+    signingConfigs {
+        create("release") {
+            // Read from GitHub environment variables
+            storeFile = rootProject.file("release.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            
+            // Attach the signing configuration to your release build
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+}
+Use code with caution.
+
+⚠️ A Crucial Security Step
+
+For the runner to compile the signed app, it physically needs the actual keystore file (release.keystore). Never commit your .keystore or .jks file directly to GitHub.
+Instead, the cleanest approach is to add your keystore directly into the root directory of your project source code, but add its filename to your .gitignore file so it stays safe on your local machine and never leaks online.
+If you don't want to check in the keystore file, I can show you how to base64-encode your keystore file into a GitHub Secret so the workflow script can generate it on the fly. Would you like to set that up?
+To base64-encode your keystore file so that you can securely reconstruct it on the GitHub runner without committing it to your repository, follow these quick steps:
+
+Step 1: Base64-Encode Your Keystore Locally
+
+Run the following command in your local machine's terminal (inside the directory where your keystore file is located):
+• On macOS / Linux:bash
+base64 -i your_release_keystore.jks | pbcopy
+Use code with caution.
+(This encodes the file and automatically copies the giant string of text to your clipboard).
+• On Windows (PowerShell):powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("your_release_keystore.jks")) | clip
+Use code with caution.
+
+Step 2: Add the String to GitHub Secrets
+
+1. Go to your GitHub repository > Settings > Secrets and variables > Actions.
+2. Click New repository secret.
+3. Name it KEYSTORE_BASE64.
+4. Paste the long text string from your clipboard into the value field and save it.
+
+Step 3: Update Your android.yml Workflow File
+
+Now, insert a new step right before your build command to decode that text string back into a physical keystore file on the runner machine:
+yaml
+    # Insert this step right before the "Build Signed Release App Bundle" step
+    - name: Decode and Reconstruct Keystore File
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+Use code with caution.
+This ensures release.keystore exists temporarily in your root directory during compilation and is securely wiped when the GitHub runner finishes its job.
+Would you like to review the final updated android.yml file showing exactly where this decoding step fits in, or do you have any other security configurations you want to add?
+Here is the complete, fully updated android.yml file including the secure keystore decoding step. This setup means you never have to commit your sensitive keystore file to your repository.
+yaml
+name: Android CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout the source code
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    # 2. Initialize the modern Java environment with automatic Gradle caching
+    - name: Set up JDK 17
+      uses: actions/setup-java@v6
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    # 3. Secure necessary execution permissions for the Gradle wrapper
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # 4. Perform static code analysis to catch bugs early
+    - name: Run Android Lint
+      run: ./gradlew lintDebug
+
+    # 5. Run local JUnit unit tests
+    - name: Run Unit Tests
+      run: ./gradlew testDebugUnitTest
+
+    # 6. Assemble an un-signed Debug APK for manual internal testing
+    - name: Build and Assemble Debug APK
+      run: ./gradlew assembleDebug
+
+    # 7. Persist the Debug APK on GitHub so your team can download it directly
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+
+    # 8. Safely decode your keystore from GitHub Secrets on the fly
+    - name: Decode and Reconstruct Keystore File
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+
+    # 9. Generate the Production Release Android App Bundle (.aab) using the keystore
+    - name: Build Signed Release App Bundle
+      run: ./gradlew bundleRelease
+      env:
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+    # 10. Deploy the production bundle seamlessly to the Google Play Internal Track
+    - name: Upload to Google Play Internal Track
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        packageName: com.yourcompany.yourapp  # Replace with your actual application package ID
+        releaseFiles: app/build/outputs/bundle/release/app-release.aab
+        track: internal
+Use code with caution.
+
+Final Checklist for GitHub Secrets
+
+Ensure you have added these 5 repository secrets in your GitHub Settings:
+1. KEYSTORE_BASE64 (The string produced by encoding your keystore)
+2. KEYSTORE_PASSWORD
+3. KEY_ALIAS
+4. KEY_PASSWORD
+5. PLAY_SERVICE_ACCOUNT_JSON
+We can set up a task to trace deployment success if you encounter errors during your first live execution. Let me know if you would like to troubleshoot compilation logs or explore adding Slack/Discord notifications when the build completes!
